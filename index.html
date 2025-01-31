@@ -12,6 +12,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/wavesurfer.js@7"></script>
     <script src="helper.js" defer></script>
+    <script>
+      function _setup_callback(elem, elems) {
+        elem.addEventListener("play", function () {
+          for (other of elems) {
+            if (other !== elem) {
+              other.pause();
+            }
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.body.getElementsByTagName("audio");
+        for (elem of elems) {
+          _setup_callback(elem, elems);
+        }
+      });
+    </script>
     <style>
       td {
         vertical-align: middle;
